@@ -1,12 +1,12 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Владислав Зачесов](https://up.htmlacademy.ru/javascript/28/user/1702959).
-* Наставник: `Неизвестно`.
+* Студент: [Владян](https://up.htmlacademy.ru/javascript/28/user/1702959)
+* Наставник: [Ирина](https://htmlacademy.ru/profile/id2070039)
 
 ---
 
 _Не удаляйте и не изменяйте самовольно файлы и папки:_
-_`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `package-lock.json`, `package.json`., `.github`_
+_`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `package-lock.json`, `package.json`, `.github`, `.nvmrc`, `.vscode/extensions.json`_
 
 ---
 
