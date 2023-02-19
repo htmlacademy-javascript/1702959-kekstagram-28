@@ -5,3 +5,13 @@ describe('isLessThan', () => {
     expect(isLessThan('проверяемая строка', 10)).toBeFalsy();
   })
 });
+
+
+describe('isPalindrome', () => {
+  it('academy expections', () => {
+    expect(isPalindrome('топот')).toBeTruthy();
+    expect(isPalindrome('ДовОд')).toBeTruthy();
+    expect(isPalindrome('Кекс')).toBeFalsy();
+    expect(isPalindrome('Лёша на полке клопа нашёл ')).toBeTruthy();
+  })
+});

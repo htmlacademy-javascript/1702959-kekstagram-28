@@ -3,3 +3,7 @@ function isLessThan(expectation, length){
 }
 
 
+function isPalindrome(expectation){
+  const src = expectation.toString().toLowerCase().replaceAll(' ', '');
+  return src === src.split('').reverse().join('');
+}
