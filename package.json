@@ -14,8 +14,8 @@
     "browser-sync": "2.27.11",
     "eslint": "8.33.0",
     "eslint-config-htmlacademy": "9.0.0",
-    "jest": "^29.4.3",
-    "jest-environment-jsdom": "^29.4.3"
+    "jest": "29.4.3",
+    "jest-environment-jsdom": "29.4.3"
   },
   "license": "MIT",
   "scripts": {
