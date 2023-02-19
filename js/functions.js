@@ -19,3 +19,29 @@ function numberExtract(expectation){
   }
   return result.length !== 0 ? parseInt(result, 10) : NaN;
 }
+
+
+function stringPad(src, targetLength, padString){
+  let result = src;
+  targetLength -= src.length;
+  if(targetLength > 0){
+    const appendable = [];
+    let appendix = '';
+    let counter = 0;
+    while(targetLength > 0){
+      appendix += padString[counter];
+      targetLength--;
+      counter++;
+      if(counter > padString.length - 1){
+        counter = 0;
+        appendable.unshift(appendix);
+        appendix = '';
+      }
+    }
+    if(appendix.length !== 0){
+      appendable.unshift(appendix);
+    }
+    result = appendable.join('') + result;
+  }
+  return result;
+}

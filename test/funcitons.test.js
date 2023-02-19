@@ -28,3 +28,15 @@ describe('numberExtract', () => {
     expect(numberExtract(1.5)).toBe(15);
   })
 });
+
+
+
+describe('stringPad', () => {
+  it('academy expectations', () => {
+    expect(stringPad('1', 2, '0')).toBe('01');
+    expect(stringPad('1', 4, '0')).toBe('0001');
+    expect(stringPad('q', 4, 'werty')).toBe('werq');
+    expect(stringPad('q', 4, 'we')).toBe('wweq');
+    expect(stringPad('qwerty', 4, '0')).toBe('qwerty');
+  })
+});
