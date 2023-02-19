@@ -1,20 +1,28 @@
-describe('isLessThan', () => {
+describe('isShorterThan', () => {
   it('academy expectations', () => {
-    expect(isLessThan('проверяемая строка', 20)).toBeTruthy();
-    expect(isLessThan('проверяемая строка', 18)).toBeTruthy();
-    expect(isLessThan('проверяемая строка', 10)).toBeFalsy();
+    expect(isShorterThan('проверяемая строка', 20)).toBe(true);
+    expect(isShorterThan('проверяемая строка', 18)).toBe(true);
+    expect(isShorterThan('проверяемая строка', 10)).toBe(false);
   })
+  it('custom expecatations', () => {
+    expect(isShorterThan(11, 20)).toBe(true);
+    expect(isShorterThan(1, 1)).toBe(true);
+    expect(isShorterThan(1, 0)).toBe(false);
+    expect(isShorterThan('', 0)).toBe(true);
+  });
 });
 
 
 describe('isPalindrome', () => {
   it('academy expectations', () => {
-    expect(isPalindrome('топот')).toBeTruthy();
-    expect(isPalindrome('ДовОд')).toBeTruthy();
-    expect(isPalindrome('Кекс')).toBeFalsy();
-    expect(isPalindrome('Лёша на полке клопа нашёл ')).toBeTruthy();
-    expect(isPalindrome(1221)).toBeTruthy();
-    expect(isPalindrome(1211)).toBeFalsy();
+    expect(isPalindrome('топот')).toBe(true);
+    expect(isPalindrome('ДовОд')).toBe(true);
+    expect(isPalindrome('Кекс')).toBe(false);
+    expect(isPalindrome('Лёша на полке клопа нашёл ')).toBe(true);
+  })
+  it('custom expecatations', () => {
+    expect(isPalindrome(1221)).toBe(true);
+    expect(isPalindrome(1211)).toBe(false);
   })
 });
 

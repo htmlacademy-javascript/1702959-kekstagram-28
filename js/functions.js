@@ -1,5 +1,5 @@
-function isLessThan(expectation, length){
-  return expectation.length <= length;
+function isShorterThan(expectation, length){
+  return expectation.toString().length <= length;
 }
 
 
