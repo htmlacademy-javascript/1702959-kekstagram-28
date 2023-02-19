@@ -8,7 +8,7 @@ function isPalindrome(expectation){
   return src === src.split('').reverse().join('');
 }
 
-function numberExtract(expectation){
+function extractNumber(expectation){
   const src = expectation.toString();
   let result = '';
   for(const item of src){
@@ -21,18 +21,18 @@ function numberExtract(expectation){
 }
 
 
-function stringPad(src, targetLength, padString){
-  let result = src;
-  targetLength -= src.length;
+function padString(stringSrc, targetLength, pad){
+  let result = stringSrc;
+  targetLength -= stringSrc.length;
   if(targetLength > 0){
     const appendable = [];
     let appendix = '';
     let counter = 0;
     while(targetLength > 0){
-      appendix += padString[counter];
+      appendix += pad[counter];
       targetLength--;
       counter++;
-      if(counter > padString.length - 1){
+      if(counter > pad.length - 1){
         counter = 0;
         appendable.unshift(appendix);
         appendix = '';
