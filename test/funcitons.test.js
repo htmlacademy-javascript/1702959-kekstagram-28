@@ -27,7 +27,7 @@ describe('isPalindrome', () => {
 });
 
 
-describe('numberExtract', () => {
+describe('extractNumber', () => {
   it('academy expectations', () => {
     expect(extractNumber('2023 год')).toBe(2023);
     expect(extractNumber('ECMAScript 2022')).toBe(2022);
@@ -41,7 +41,7 @@ describe('numberExtract', () => {
 
 
 
-describe('stringPad', () => {
+describe('padString', () => {
   it('academy expectations', () => {
     expect(padString('1', 2, '0')).toBe('01');
     expect(padString('1', 4, '0')).toBe('0001');
