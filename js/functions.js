@@ -9,14 +9,7 @@ function isPalindrome(expectation){
 }
 
 function extractNumber(expectation){
-  const src = expectation.toString();
-  let result = '';
-  for(const item of src){
-    const parsed = parseInt(item, 10);
-    if(!isNaN(parsed)){
-      result += parsed;
-    }
-  }
+  const result = expectation.toString().replaceAll(/\D/gm, '');
   return result.length !== 0 ? parseInt(result, 10) : NaN;
 }
 
