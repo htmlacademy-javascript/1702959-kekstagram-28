@@ -23,23 +23,23 @@ function extractNumber(expectation){
 
 function padString(stringSrc, targetLength, pad){
   let result = stringSrc;
-  const length = targetLength - stringSrc.length;
+  const padLength = targetLength - stringSrc.length;
   if(targetLength > 0){
-    let appendix = '';
-    let counter = 0;
-    const appendable = Array.from({length}).reduce((res, currentVal, currentIndex) =>{
-      appendix += pad[counter];
-      counter++;
-      if(counter > pad.length - 1){
-        counter = 0;
-        res.unshift(appendix);
-        appendix = '';
-      } else if(currentIndex === length - 1 && appendix.length !== 0){
-        res.unshift(appendix);
-      }
-      return res;
-    },[]);
-    result = appendable.join('') + result;
+    result = Array
+      .from({length:Math.ceil(padLength / pad.length)}, () => pad)
+      .reduce(
+        (resPad, stringPad) => {
+          let padBuf = '';
+          for(const char of stringPad){
+            if(padBuf.length + resPad.length === padLength){
+              break;
+            }
+            padBuf += char;
+          }
+          resPad = padBuf + resPad;
+          return resPad;
+        }, ''
+      ) + result;
   }
   return result;
 }
