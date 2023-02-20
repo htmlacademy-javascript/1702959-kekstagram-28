@@ -8,23 +8,11 @@ const isPalindrome = (expectation) => (
 
 const extractNumber = (expectation) => parseInt(expectation.toString().replaceAll(/\D/gm, ''), 10);
 
-const padString = (stringSrc, targetLength, pad) => (
+const padStart = (stringSrc, targetLength, pad) => (
   (targetLength -= stringSrc.length),
-  targetLength > 0 ? (Array
-    .from({length:Math.ceil(targetLength / pad.length)}, () => pad)
-    .reduce(
-      (resPad, stringPad) => {
-        let padBuf = '';
-        for(const char of stringPad){
-          if(padBuf.length + resPad.length === targetLength){
-            break;
-          }
-          padBuf += char;
-        }
-        resPad = padBuf + resPad;
-        return resPad;
-      }, ''
-    ) + stringSrc) : stringSrc
+  targetLength > 0 ?
+    (pad.slice(0, targetLength % pad.length) + pad.repeat(targetLength / pad.length) + stringSrc) :
+    stringSrc
 );
 
 
@@ -71,12 +59,12 @@ describe('extractNumber', () => {
 
 
 
-describe('padString', () => {
+describe('padStart', () => {
   it('academy expectations', () => {
-    expect(padString('1', 2, '0')).toBe('01');
-    expect(padString('1', 4, '0')).toBe('0001');
-    expect(padString('q', 4, 'werty')).toBe('werq');
-    expect(padString('q', 4, 'we')).toBe('wweq');
-    expect(padString('qwerty', 4, '0')).toBe('qwerty');
+    expect(padStart('1', 2, '0')).toBe('01');
+    expect(padStart('1', 4, '0')).toBe('0001');
+    expect(padStart('q', 4, 'werty')).toBe('werq');
+    expect(padStart('q', 4, 'we')).toBe('wweq');
+    expect(padStart('qwerty', 4, '0')).toBe('qwerty');
   })
 });

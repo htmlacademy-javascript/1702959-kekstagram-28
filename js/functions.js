@@ -8,21 +8,9 @@ const isPalindrome = (expectation) => (
 
 const extractNumber = (expectation) => parseInt(expectation.toString().replaceAll(/\D/gm, ''), 10);
 
-const padString = (stringSrc, targetLength, pad) => (
+const padStart = (stringSrc, targetLength, pad) => (
   (targetLength -= stringSrc.length),
-  targetLength > 0 ? (Array
-    .from({length:Math.ceil(targetLength / pad.length)}, () => pad)
-    .reduce(
-      (resPad, stringPad) => {
-        let padBuf = '';
-        for(const char of stringPad){
-          if(padBuf.length + resPad.length === targetLength){
-            break;
-          }
-          padBuf += char;
-        }
-        resPad = padBuf + resPad;
-        return resPad;
-      }, ''
-    ) + stringSrc) : stringSrc
+  targetLength > 0 ?
+    (pad.slice(0, targetLength % pad.length) + pad.repeat(targetLength / pad.length) + stringSrc) :
+    stringSrc
 );
