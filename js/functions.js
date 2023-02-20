@@ -9,10 +9,8 @@ function isPalindrome(expectation){
 }
 
 function extractNumber(expectation){
-  const result = expectation.toString().replaceAll(/\D/gm, '');
-  return result.length !== 0 ? parseInt(result, 10) : NaN;
+  return parseInt(expectation.toString().replaceAll(/\D/gm, ''), 10);
 }
-
 
 function padString(stringSrc, targetLength, pad){
   let result = stringSrc;
