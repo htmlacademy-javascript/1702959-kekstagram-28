@@ -1,3 +1,11 @@
+import {
+  isShorterThan,
+  isPalindrome,
+  extractNumber,
+  padStart
+} from '../js/functions';
+
+
 describe('isShorterThan', () => {
   it('academy expectations', () => {
     expect(isShorterThan('проверяемая строка', 20)).toBe(true);
@@ -41,12 +49,12 @@ describe('extractNumber', () => {
 
 
 
-describe('padString', () => {
+describe('padStart', () => {
   it('academy expectations', () => {
-    expect(padString('1', 2, '0')).toBe('01');
-    expect(padString('1', 4, '0')).toBe('0001');
-    expect(padString('q', 4, 'werty')).toBe('werq');
-    expect(padString('q', 4, 'we')).toBe('wweq');
-    expect(padString('qwerty', 4, '0')).toBe('qwerty');
+    expect(padStart('1', 2, '0')).toBe('01');
+    expect(padStart('1', 4, '0')).toBe('0001');
+    expect(padStart('q', 4, 'werty')).toBe('werq');
+    expect(padStart('q', 4, 'we')).toBe('wweq');
+    expect(padStart('qwerty', 4, '0')).toBe('qwerty');
   })
 });

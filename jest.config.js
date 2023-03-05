@@ -1,5 +1,4 @@
-module.exports = {
+export default {
   verbose: true,
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['./setup.js'],
 };
