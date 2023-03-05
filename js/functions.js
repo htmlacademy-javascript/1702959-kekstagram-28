@@ -10,13 +10,13 @@ const extractNumber = (expectation) => parseInt(expectation.toString().replaceAl
 
 const padStart = (stringSrc, requestedLength, pad) => {
   const targetLength = requestedLength - stringSrc.length;
-  return targetLength > 0 ?
-    (() => {
-      const repeatedPartial = pad.slice(0, targetLength % pad.length);
-      const repeated = pad.repeat(targetLength / pad.length);
-      return (repeatedPartial + repeated + stringSrc);
-    })() :
-    stringSrc;
+  let result = stringSrc;
+  if (targetLength > 0) {
+    const repeatedPartial = pad.slice(0, targetLength % pad.length);
+    const repeated = pad.repeat(targetLength / pad.length);
+    result = repeatedPartial + repeated + stringSrc;
+  }
+  return result;
 };
 
 export {
