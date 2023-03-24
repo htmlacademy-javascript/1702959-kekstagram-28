@@ -131,7 +131,7 @@ const photosFactory = (comments) => {
       id,
       url: `photos/${id}.jpg`,
       description: descriptions.getRandom(),
-      likes: getRandomInt(),
+      likes: getRandomInt(0,1000),
       comments: comments.getRandomBatch(getRandomInt(1, APP_COMMENTS_FOR_POST))
     }),
     APP_PHOTO_COUNT
