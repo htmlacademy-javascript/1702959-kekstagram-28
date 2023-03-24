@@ -99,7 +99,7 @@ const createObjectStore = (factory, count) => {
 
 const usersFactory = () => {
   const namesStore = createObjectStore((id) => APP_NAMES_BANK[id - 1], APP_NAMES_BANK.length + 1, true);
-  const store = createObjectStore(
+  return createObjectStore(
     (id) => ({
       id,
       ...namesStore.getRandom(),
@@ -107,7 +107,6 @@ const usersFactory = () => {
     }),
     APP_USERS_COUNT
   );
-  return store;
 };
 const commentsFactory = (users) => {
   const commentStore = createObjectStore((id) => APP_COMMENTS_BANK[id - 1], APP_COMMENTS_BANK.length + 1, true);
@@ -130,7 +129,7 @@ const photosFactory = (comments) => {
   return createObjectStore(
     (id) => ({
       id,
-      url: `photo/${id}.jpg`,
+      url: `photos/${id}.jpg`,
       description: descriptions.getRandom(),
       likes: getRandomInt(),
       comments: comments.getRandomBatch(getRandomInt(1, APP_COMMENTS_FOR_POST))
@@ -139,10 +138,10 @@ const photosFactory = (comments) => {
   );
 };
 
-const generateKekstangram = () => {
+// eslint-disable-next-line no-unused-vars
+const generateKekstagram = () => {
   const users = usersFactory();
   const comments = commentsFactory(users);
   const photo = photosFactory(comments);
   return photo.selectQuery();
 };
-const photos = generateKekstangram();
