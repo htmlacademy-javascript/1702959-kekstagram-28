@@ -28,7 +28,15 @@ const createDocument = (store, idSeq) => {
     }
     return batch;
   };
-  const selectQuery = () => Object.values(store);
+  const selectQuery = (filterCallback) => (
+    filterCallback ?
+      Object.values(
+        Object
+          .entries(store).filter(([id, object]) => filterCallback(id, object))
+          .map(([, object]) => object)
+      ) :
+      Object.values(store)
+  );
   return {
     selectQuery,
     selectOne,
