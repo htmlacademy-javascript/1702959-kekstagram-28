@@ -1,4 +1,4 @@
-import { useKekstagram } from './keks-db/index.js';
+import { useKekstagram } from './feature/keks-db/index.js';
 
 const kekstagramStore = useKekstagram();
 // eslint-disable-next-line no-console
