@@ -20,11 +20,26 @@ const createDocument = (store, idSeq) => {
     return result;
   };
 
-  const getRandom = () => store[getRandomInt(1, idSeq.currentValue())];
+  const getRandomKey = () => getRandomInt(1, idSeq.currentValue());
+  const getRandom = () => store[getRandomKey()];
   const getRandomBatch = (batchCount) => {
     const batch = [];
-    while (batch.length < batchCount && batch.length < idSeq.currentValue()) {
-      batch.push(getRandom());
+    const batchKeys = [];
+    const getRandKey = () => {
+      let randKey = getRandomKey();
+      while (batchKeys.includes(randKey)) {
+        randKey = getRandomKey();
+      }
+      return randKey;
+    };
+    while (
+      batchCount < idSeq.currentValue() &&
+      batch.length < batchCount &&
+      batch.length < idSeq.currentValue()
+    ) {
+      const key = getRandKey();
+      batch.push(store[key]);
+      batchKeys.push(key);
     }
     return batch;
   };
