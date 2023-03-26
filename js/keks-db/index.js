@@ -21,10 +21,10 @@ const createDb = () => {
 const keksDb = createDb();
 
 
-const useKekstagramStore = () => ({
+const useKekstagram = () => ({
   getPhotos: () => keksDb.photo.selectQuery()
 });
 
 export {
-  useKekstagramStore
+  useKekstagram
 };

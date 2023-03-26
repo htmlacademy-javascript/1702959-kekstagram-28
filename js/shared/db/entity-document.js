@@ -1,5 +1,5 @@
-import { createSequnce } from './sequnce.js';
-import { getRandomInt } from '../random.js';
+import {createSequnce} from './sequnce.js';
+import {getRandomInt} from '../random.js';
 
 
 const createDocument = (store, idSeq) => {
@@ -38,13 +38,15 @@ const createDocument = (store, idSeq) => {
   };
 };
 
-const installEntityDocument = (factory, count) => {
+const installEntityDocument = (factory, length) => {
   const idSeq = createSequnce();
-  const store = Object.fromEntries(
-    Array.from({ length: count }, () => {
+  const store = Array.from({length}).reduce(
+    (document) => {
       const id = idSeq.nextValue();
-      return [id, factory(id)];
-    })
+      document[id] = factory(id);
+      return document;
+    },
+    {}
   );
   return createDocument(store, idSeq);
 };

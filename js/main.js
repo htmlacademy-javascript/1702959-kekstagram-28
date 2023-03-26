@@ -1,4 +1,4 @@
-import { useKekstagramStore } from './keks-db/index.js';
+import { useKekstagram } from './keks-db/index.js';
 
-const kekstagramStore = useKekstagramStore();
+const kekstagramStore = useKekstagram();
 console.log(kekstagramStore.getPhotos());
