@@ -1,5 +1,5 @@
-import { installEntityDocument } from '../../shared/db/entity-document.js';
-import { getRandomInt } from '../../shared/random.js';
+import { installEntityDocument } from '../../../shared/db/entity-document.js';
+import { getRandomInt } from '../../../shared/random.js';
 import { createDescriptionDocument } from './description.document.js';
 
 
