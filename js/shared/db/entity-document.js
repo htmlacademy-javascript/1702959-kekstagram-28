@@ -33,7 +33,7 @@ const createDocument = (store, idSeq) => {
       return randKey;
     };
     while (
-      batchCount < idSeq.currentValue() &&
+      batchCount <= idSeq.currentValue() &&
       batch.length < batchCount &&
       batch.length < idSeq.currentValue()
     ) {
