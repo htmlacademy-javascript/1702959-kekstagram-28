@@ -3,7 +3,7 @@ import { createPhotoList } from '../entity/photo/ui/photo-list.js';
 
 export const renderPhotoFeed = () => {
   const kekstagramStore = useKekstagram();
-  const feedList = createPhotoList(kekstagramStore.getPhotoRandomOrderd());
+  const feedList = createPhotoList(kekstagramStore.getPhotosRandomBatch(true));
 
   const photoFeedContainer = document.querySelector('.pictures');
   photoFeedContainer.innerHTML = '';
