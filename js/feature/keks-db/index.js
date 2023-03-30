@@ -22,6 +22,9 @@ const keksDb = createDb();
 
 
 const useKekstagram = () => ({
+  /**
+   * @description список фотографий в случайном порядке
+   */
   getPhotosRandomBatch: () => keksDb.photo.getRandomBatch(APP_PHOTO_COUNT),
 });
 
