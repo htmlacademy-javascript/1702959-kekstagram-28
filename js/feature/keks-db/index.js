@@ -26,6 +26,11 @@ const useKekstagram = () => ({
    * @description список фотографий в случайном порядке
    */
   getPhotosRandomBatch: () => keksDb.photo.getRandomBatch(APP_PHOTO_COUNT),
+
+  /**
+   * @description получает фото по id
+   */
+  getPhotoById: (id) => keksDb.photo.getById(id),
 });
 
 export {
