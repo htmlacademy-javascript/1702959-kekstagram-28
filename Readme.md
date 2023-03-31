@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Владян](https://up.htmlacademy.ru/javascript/28/user/1702959)
-* Наставник: [Ирина](https://htmlacademy.ru/profile/id2070039)
+* Наставник: [Петр](https://htmlacademy.ru/profile/id41225)
 
 ---
 

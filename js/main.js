@@ -1,5 +1,3 @@
-import { useKekstagram } from './feature/keks-db/index.js';
+import { renderPhotoFeed } from './widget/photo-feed.js';
 
-const kekstagramStore = useKekstagram();
-// eslint-disable-next-line no-console
-console.log(kekstagramStore.getPhotos());
+renderPhotoFeed();
