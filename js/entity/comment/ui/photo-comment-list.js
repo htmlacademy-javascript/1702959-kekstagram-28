@@ -1,5 +1,5 @@
 import { createPhotoCommentList } from './photo-comment.js';
-const getCounterBody = (showedCount, commentCount) => `${showedCount} из <span class="comments-count">${commentCount}</span> комментариев`
+const getCounterBody = (showedCount, commentCount) => `${showedCount} из <span class="comments-count">${commentCount}</span> комментариев`;
 
 export const photoCommentList = (comments) => {
   const PAGE_SIZE = 5;
