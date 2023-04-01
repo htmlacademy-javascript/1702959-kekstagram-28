@@ -1,12 +1,15 @@
-import { renderPhotoDetail } from '../entity/photo/ui/photo-detail.js';
+import { photoDetail } from '../entity/photo/ui/photo-detail.js';
 import { useKekstagram } from '../feature/keks-db/index.js';
+import { photoCommentList } from '../entity/comment/ui/photo-comment-list.js';
 
 export const installPhotoDialog = () => {
   const kekstagramStore = useKekstagram();
+
   document.querySelectorAll('.picture').forEach((photo) => {
     photo.addEventListener('click', (event) => {
       event.preventDefault();
-      renderPhotoDetail(kekstagramStore.getPhotoById(photo.dataset.id));
+      const photoData = kekstagramStore.getPhotoById(photo.dataset.id);
+      photoDetail(photoData).render(photoCommentList(photoData.comments));
     });
   });
 };

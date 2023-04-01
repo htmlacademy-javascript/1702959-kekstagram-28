@@ -1,4 +1,4 @@
-import { entityDocumentFromArray } from '../../shared/db/entity-document.js';
+import { entityDocumentFromArray } from '../../../shared/db/entity-document.js';
 
 const APP_COMMENT_TEXT_BANK = [
   'Всё отлично!',

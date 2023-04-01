@@ -1,5 +1,5 @@
 import { createUserDocument } from '../../entity/user/document.js';
-import { createCommentDocument } from '../../entity/comment/document.js';
+import { createCommentDocument } from '../../entity/comment/store/document.js';
 import { createPhotoDocument } from '../../entity/photo/store/document.js';
 import {
   APP_PHOTO_COUNT,
