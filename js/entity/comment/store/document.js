@@ -1,4 +1,4 @@
-import { installEntityDocument } from '../../shared/db/entity-document.js';
+import { installEntityDocument } from '../../../shared/db/entity-document.js';
 import { createCommentTextDocument } from './coment-text.document.js';
 
 /**
