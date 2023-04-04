@@ -7,4 +7,10 @@ export const createPhotoUploader = (fileCb) => {
       fileCb(file);
     }
   });
+  const cleanup = () => {
+    uploader.value = null;
+  };
+  return {
+    cleanup
+  };
 };
