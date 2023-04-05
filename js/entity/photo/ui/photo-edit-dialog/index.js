@@ -1,8 +1,10 @@
 import { createCloseBtn } from './close-btn.js';
 import { createPreviewImg } from './preview-img.js';
 import { createPhotoEditForm } from './form.js';
+import { useCallback } from '../../../../shared/useCallback.js';
 
-export const createPhotoEditDialog = (onClose) => {
+export const createPhotoEditDialog = () => {
+  const onClose = useCallback();
   const form = createPhotoEditForm();
   const editPhotoOverlay = document.querySelector('.img-upload__overlay');
   const closeBtn = createCloseBtn(
@@ -10,9 +12,7 @@ export const createPhotoEditDialog = (onClose) => {
     editPhotoOverlay,
     () => {
       form.cleanupEvents();
-      if (typeof onClose === 'function') {
-        onClose();
-      }
+      onClose.call();
     }
   );
   const previewImg = createPreviewImg(editPhotoOverlay.querySelector('.img-upload__preview img'));
@@ -24,7 +24,8 @@ export const createPhotoEditDialog = (onClose) => {
   };
   return {
     show,
-    setFile: (file) => previewImg.setPreviewImage(file)
+    setFile: (file) => previewImg.setPreviewImage(file),
+    onClose: onClose.set
   };
 };
 
