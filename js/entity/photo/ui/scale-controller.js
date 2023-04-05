@@ -20,14 +20,27 @@ const createRangeController = ({ initialValue, step, range } = { initialValue: 5
   });
 
   return {
-    onUpdate: onUpdate.set
+    onUpdate: onUpdate.set,
+    getValue: () => value,
   };
 };
+
 const createScaleController = () => {
   const inputValue = document.querySelector('.scale__control.scale__control--value');
+  const setInputValue = (v) => {
+    inputValue.value = `${v}%`;
+  };
+  const imageScale = document.querySelector('.img-upload__preview');
+  const setPhotoScale = (v) => {
+    imageScale.style.transform = `scale(0.${v})`;
+  };
   const rangeController = createRangeController();
+
   rangeController.onUpdate((value) => {
-    inputValue.value = `${value}%`;
+    setInputValue(value);
+    setPhotoScale(value);
   });
+  setPhotoScale(rangeController.getValue());
+
 };
 export { createScaleController };
