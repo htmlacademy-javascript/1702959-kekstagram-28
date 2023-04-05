@@ -1,36 +1,37 @@
-import { createUserDocument } from '../../entity/user/document.js';
-import { createCommentDocument } from '../../entity/comment/store/document.js';
-import { createPhotoDocument } from '../../entity/photo/store/document.js';
-import {
-  APP_PHOTO_COUNT,
-  APP_USERS_COUNT,
-  APP_COMMENTS_FOR_POST
-} from './config.js';
+import {photoListGet} from '../../entity/photo/api/list.get.js';
+import {entityDocumentFromArray} from '../../shared/db/entity-document.js';
+import {createError} from '../../shared/ui/error.js';
 
-const createDb = () => {
-  const users = createUserDocument(APP_USERS_COUNT);
-  const comments = createCommentDocument(users, APP_PHOTO_COUNT * APP_COMMENTS_FOR_POST);
-  const photo = createPhotoDocument(comments, APP_COMMENTS_FOR_POST, APP_PHOTO_COUNT);
 
-  return {
-    users,
-    comments,
-    photo
-  };
+const createDb = async () => {
+  try {
+    const photoList = await photoListGet();
+    return {
+      photo: entityDocumentFromArray(photoList)
+    };
+  } catch (_) {
+    createError({
+      message: 'Неудалось загрузить изображения',
+      keyMessage: 'Перезагрузить страницу',
+      onErrorClick: () => {
+        location.reload();
+      }
+    });
+  }
 };
-const keksDb = createDb();
+const keksDb = await createDb();
 
 
 const useKekstagram = () => ({
   /**
-   * @description список фотографий в случайном порядке
-   */
-  getPhotosRandomBatch: () => keksDb.photo.getRandomBatch(APP_PHOTO_COUNT),
-
-  /**
    * @description получает фото по id
    */
-  getPhotoById: (id) => keksDb.photo.getById(id),
+  getPhotoById: (id) => keksDb?.photo.getById(id),
+
+  /**
+   * @description список фотографий
+   */
+  getAllPhotos: () => keksDb?.photo.selectQuery(),
 });
 
 export {

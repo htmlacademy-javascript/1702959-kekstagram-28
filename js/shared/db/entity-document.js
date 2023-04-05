@@ -1,5 +1,5 @@
-import { createSequence } from './sequence.js';
-import { getRandomInt } from '../random.js';
+import {createSequence} from './sequence.js';
+import {getRandomInt} from '../random.js';
 
 
 const createDocument = (store, idSeq) => {
@@ -24,6 +24,7 @@ const createDocument = (store, idSeq) => {
   const getRandomKey = () => getRandomInt(1, idSeq.currentValue());
   const getRandom = () => store[getRandomKey()];
   const getRandomBatch = (batchCount) => {
+    batchCount ??= idSeq.currentValue();
     const batch = [];
     const batchKeys = [];
     const getRandKey = () => {
@@ -65,7 +66,7 @@ const createDocument = (store, idSeq) => {
 
 const installEntityDocument = (factory, length) => {
   const idSeq = createSequence();
-  const store = Array.from({ length }).reduce(
+  const store = Array.from({length}).reduce(
     (document) => {
       const id = idSeq.nextValue();
       document[id] = factory(id);
