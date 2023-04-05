@@ -1,6 +1,6 @@
 import { useCallback } from '../../../shared/useCallback.js';
 
-const createRangeController = ({ initialValue, step, range } = { initialValue: 55, step: 5, range: { min: 0, max: 100 } }) => {
+const createRangeController = ({ initialValue, step, range } = { initialValue: 100, step: 25, range: { min: 25, max: 100 } }) => {
   const moreKeyClass = 'scale__control--bigger';
   const lessKeyClass = 'scale__control--smaller';
   const scaleKeys = document.querySelectorAll('button.scale__control');
@@ -18,29 +18,30 @@ const createRangeController = ({ initialValue, step, range } = { initialValue: 5
       onUpdate.call(value);
     });
   });
+  const reset = () => {
+    value = initialValue;
+    onUpdate.call(value);
+  };
 
   return {
     onUpdate: onUpdate.set,
     getValue: () => value,
+    reset,
   };
 };
 
-const createScaleController = () => {
+const createScaleController = (scaleImg) => {
   const inputValue = document.querySelector('.scale__control.scale__control--value');
-  const setInputValue = (v) => {
-    inputValue.value = `${v}%`;
+  const setupValue = (value) => {
+    inputValue.value = `${value}%`;
+    scaleImg.style.transform = `scale(${value * 0.01})`;
   };
-  const imageScale = document.querySelector('.img-upload__preview');
-  const setPhotoScale = (v) => {
-    imageScale.style.transform = `scale(0.${v})`;
-  };
+
   const rangeController = createRangeController();
-
-  rangeController.onUpdate((value) => {
-    setInputValue(value);
-    setPhotoScale(value);
-  });
-  setPhotoScale(rangeController.getValue());
-
+  rangeController.onUpdate(setupValue);
+  setupValue(rangeController.getValue());
+  return {
+    reset: rangeController.reset
+  };
 };
 export { createScaleController };
