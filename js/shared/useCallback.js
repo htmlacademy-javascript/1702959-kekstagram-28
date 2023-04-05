@@ -1,19 +1,14 @@
 export const useCallback = (callback = null) => {
   let cb = callback;
-  const call = () => {
-    if (typeof cb === 'function') {
-      cb();
-    }
-  };
-  call();
+
   return {
-    call,
+    call: (...args) => {
+      if (typeof cb === 'function') {
+        cb.apply(null, args);
+      }
+    },
     set(cback) {
       cb = cback;
-      return this;
-    },
-    bind(binder) {
-      cb = binder(cb);
       return this;
     }
   };

@@ -4,8 +4,7 @@ export const createPhotoUploader = () => {
   const fileHandler = useCallback();
   const uploader = document.getElementById('upload-file');
   uploader.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    fileHandler.bind((cb) => cb.bind(null, file)).call();
+    fileHandler.call(event.target.files[0]);
   });
   const cleanup = () => {
     uploader.value = null;
