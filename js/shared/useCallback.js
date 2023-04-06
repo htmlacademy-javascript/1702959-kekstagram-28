@@ -1,3 +1,6 @@
+/**
+ * @description Устанавливает и вызывает callback
+ */
 export const useCallback = (callback = null) => {
   let cb = callback;
 
