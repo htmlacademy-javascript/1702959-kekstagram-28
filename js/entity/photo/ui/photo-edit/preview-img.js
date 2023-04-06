@@ -1,7 +1,7 @@
 export const createPreviewImg = (previewImg) => {
   const placeholderImage = previewImg.getAttribute('src');
   const fileReader = new FileReader();
-  fileReader.onloadend = function () {
+  fileReader.onloadend = () => {
     previewImg.src = fileReader.result;
   };
   const setPreviewImage = (file) => {

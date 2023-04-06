@@ -1,13 +1,13 @@
-export const createCloseBtn = (closeBtn, overlay, onClose) => {
+export const createCloseBtn = ({closeBtn, overlay, onClose}) => {
   const hiddenClass = 'hidden';
   const staticBodyClass = 'modal-open';
 
-  const closeHanler = (event) => {
+  const closeHandler = (event) => {
     if (event.code !== undefined && event.code === 'Escape' || !event.code) {
       overlay.classList.add(hiddenClass);
       document.body.classList.remove(staticBodyClass);
-      closeBtn.removeEventListener('click', closeHanler);
-      document.removeEventListener('keydown', closeHanler);
+      closeBtn.removeEventListener('click', closeHandler);
+      document.removeEventListener('keydown', closeHandler);
       if (typeof onClose === 'function') {
         onClose();
       }
@@ -16,8 +16,8 @@ export const createCloseBtn = (closeBtn, overlay, onClose) => {
   const init = () => {
     overlay.classList.remove(hiddenClass);
     document.body.classList.add(staticBodyClass);
-    closeBtn.addEventListener('click', closeHanler);
-    document.addEventListener('keydown', closeHanler);
+    closeBtn.addEventListener('click', closeHandler);
+    document.addEventListener('keydown', closeHandler);
   };
 
   return {

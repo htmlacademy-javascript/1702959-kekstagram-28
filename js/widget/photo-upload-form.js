@@ -1,9 +1,9 @@
-import { createPhotoUploader } from '../entity/photo/ui/uploader.js';
-import { createPhotoEditDialog } from '../entity/photo/ui/photo-edit-dialog/index.js';
+import {createPhotoUploader} from '../entity/photo/ui/uploader.js';
+import {createPhotoEditModalWindow} from '../entity/photo/ui/photo-edit/modal-window.js';
 
 export const createPhotoUploadForm = () => {
   const fileUloader = createPhotoUploader();
-  const dialog = createPhotoEditDialog();
+  const dialog = createPhotoEditModalWindow();
 
   fileUloader.onUpload((file) => {
     dialog.setFile(file);

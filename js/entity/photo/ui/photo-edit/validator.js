@@ -1,4 +1,4 @@
-const initValidator = (form, hashtagsInput, descriptionInput) => {
+export const createPhotoEditValidator = ({form, hashtagsInput, descriptionInput}) => {
   const hashTagRegexp = /^#[a-zа-яё0-9]{1,19}$/i;
   const validator = new Pristine(form, {
     classTo: 'img-upload__field-wrapper',
@@ -38,35 +38,3 @@ const initValidator = (form, hashtagsInput, descriptionInput) => {
 
   return validator;
 };
-
-const createPhotoEditForm = () => {
-  const form = document.querySelector('#upload-select-image');
-  const hastags = form.querySelector('.text__hashtags');
-  const description = form.querySelector('.text__description');
-  const validator = initValidator(form, hastags, description);
-
-  form.addEventListener('submit', (submit) => {
-    const result = validator.validate();
-    if (!result) {
-      submit.preventDefault();
-    }
-  });
-
-  const preventEscapeKey = (event) => {
-    if (event.code !== undefined && event.code === 'Escape') {
-      event.stopPropagation();
-    }
-  };
-  const initEvents = () => {
-    hastags.addEventListener('keydown', preventEscapeKey);
-    description.addEventListener('keydown', preventEscapeKey);
-  };
-  const cleanupEvents = () => {
-    hastags.removeEventListener('keydown', preventEscapeKey);
-    description.removeEventListener('keydown', preventEscapeKey);
-  };
-
-  return { cleanupEvents, initEvents };
-};
-
-export { createPhotoEditForm };
