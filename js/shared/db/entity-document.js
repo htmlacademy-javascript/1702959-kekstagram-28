@@ -1,4 +1,4 @@
-import { createSequnce } from './sequnce.js';
+import { createSequence } from './sequence.js';
 import { getRandomInt } from '../random.js';
 
 
@@ -64,7 +64,7 @@ const createDocument = (store, idSeq) => {
 };
 
 const installEntityDocument = (factory, length) => {
-  const idSeq = createSequnce();
+  const idSeq = createSequence();
   const store = Array.from({ length }).reduce(
     (document) => {
       const id = idSeq.nextValue();

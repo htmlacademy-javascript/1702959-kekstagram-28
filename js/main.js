@@ -1,5 +1,7 @@
-import { installPhotoDialog } from './widget/photo-dialog.js';
-import { renderPhotoFeed } from './widget/photo-feed.js';
+import { createPhotoDialog } from './widget/photo-dialog.js';
+import { createPhotoFeed } from './widget/photo-feed.js';
+import { createPhotoUploadForm } from './widget/photo-upload-form.js';
 
-renderPhotoFeed();
-installPhotoDialog();
+createPhotoFeed();
+createPhotoDialog();
+createPhotoUploadForm();

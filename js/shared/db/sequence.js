@@ -1,4 +1,4 @@
-const createSequnce = () => {
+const createSequence = () => {
   const seqReg = [];
   let seqHead = 0;
 
@@ -16,5 +16,5 @@ const createSequnce = () => {
   };
 };
 export {
-  createSequnce
+  createSequence
 };

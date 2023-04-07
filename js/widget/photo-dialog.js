@@ -2,7 +2,7 @@ import { photoDetail } from '../entity/photo/ui/photo-detail.js';
 import { useKekstagram } from '../feature/keks-db/index.js';
 import { photoCommentList } from '../entity/comment/ui/photo-comment-list.js';
 
-export const installPhotoDialog = () => {
+export const createPhotoDialog = () => {
   const kekstagramStore = useKekstagram();
 
   document.querySelectorAll('.picture').forEach((photo) => {
