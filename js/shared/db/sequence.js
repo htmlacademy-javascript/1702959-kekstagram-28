@@ -1,9 +1,17 @@
+const sequence = function* () {
+  let seqHead = 0;
+  while (true) {
+    yield seqHead;
+    seqHead++;
+  }
+};
 const createSequence = () => {
   const seqReg = [];
   let seqHead = 0;
+  const seq = sequence();
 
   const nextValue = () => {
-    seqHead++;
+    seqHead = seq.next().value;
     seqReg.push(seqHead);
     return seqHead;
   };

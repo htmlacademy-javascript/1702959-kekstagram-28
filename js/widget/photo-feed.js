@@ -1,4 +1,4 @@
-import {useKekstagram} from '../feature/keks-db/index.js';
+import {useKekstagram} from '../feature/keks-db/useKekstagram.js';
 import {createPhotoPreviewList} from '../entity/photo/ui/photo-preview.js';
 
 export const createPhotoFeed = () => {

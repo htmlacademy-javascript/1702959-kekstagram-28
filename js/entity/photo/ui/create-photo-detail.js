@@ -6,7 +6,7 @@ const initDetailDialog = (url, likes, description) => {
   return dialog;
 };
 
-const photoDetail = ({ url, likes, description }) => {
+const createPhotoDetail = ({ url, likes, description }) => {
   const hiddenClass = 'hidden';
   const staticBodyClass = 'modal-open';
   const detail = initDetailDialog(url, likes, description);
@@ -47,5 +47,5 @@ const photoDetail = ({ url, likes, description }) => {
 
 
 export {
-  photoDetail
+  createPhotoDetail
 };

@@ -1,13 +1,14 @@
 import {photoListGet} from '../../entity/photo/api/list.get.js';
-import {entityDocumentFromArray} from '../../shared/db/entity-document.js';
+import {fromArrayEntityCollection} from '../../shared/db/entity-collection.js';
 import {createError} from '../../shared/ui/error.js';
 
 
 const createDb = async () => {
   try {
     const photoList = await photoListGet();
+    const photo = fromArrayEntityCollection(photoList);
     return {
-      photo: entityDocumentFromArray(photoList)
+      photo
     };
   } catch (_) {
     createError({
