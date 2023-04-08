@@ -1,17 +1,16 @@
-const sequence = function* () {
+const intSequence = function* () {
   let seqHead = 0;
   while (true) {
     yield seqHead;
     seqHead++;
   }
 };
-const createSequence = () => {
+const createSequence = (sequence) => {
   const seqReg = [];
   let seqHead = 0;
-  const seq = sequence();
 
   const nextValue = () => {
-    seqHead = seq.next().value;
+    seqHead = sequence.next().value;
     seqReg.push(seqHead);
     return seqHead;
   };
@@ -23,6 +22,7 @@ const createSequence = () => {
     exists
   };
 };
+const createIntSequence = () => createSequence(intSequence());
 export {
-  createSequence
+  createIntSequence as createSequence
 };
