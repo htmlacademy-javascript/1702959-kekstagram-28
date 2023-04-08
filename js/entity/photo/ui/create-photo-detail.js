@@ -1,4 +1,4 @@
-const createDetailDialog = (url, likes, description) => {
+const createDetailDialog = ({ url, likes, description }) => {
   const dialog = document.querySelector('.big-picture');
   dialog.querySelector('.big-picture__img img').src = url;
   dialog.querySelector('.likes-count').textContent = likes;
@@ -6,10 +6,10 @@ const createDetailDialog = (url, likes, description) => {
   return dialog;
 };
 
-const createPhotoDetail = ({ url, likes, description }) => {
+const createPhotoDetail = (photoDetail) => {
   const hiddenClass = 'hidden';
   const staticBodyClass = 'modal-open';
-  const detail = createDetailDialog(url, likes, description);
+  const detail = createDetailDialog(photoDetail);
 
   const initClose = (closeCb) => {
     const closeBtn = detail.querySelector('#picture-cancel');
