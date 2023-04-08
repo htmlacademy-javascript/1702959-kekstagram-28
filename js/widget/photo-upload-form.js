@@ -28,8 +28,7 @@ export const createPhotoUploadForm = () => {
       await postPhotoDetail(formData);
       createSuccess({
         onAccept: () => {
-          editWindow.acceptClose();
-          setTimeout(editWindow.close, 1000);
+          editWindow.close(true);
         }
       });
     } catch (_) {

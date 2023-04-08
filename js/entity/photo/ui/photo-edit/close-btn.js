@@ -25,7 +25,10 @@ export const createCloseBtn = ({ closeBtn, overlay, onClose }) => {
   const acceptClose = () => {
     closePrevent = false;
   };
-  const callClose = () => {
+  const callClose = (force = false) => {
+    if(force){
+      acceptClose();
+    }
     closeBtn.dispatchEvent(new Event('click'));
   };
 
