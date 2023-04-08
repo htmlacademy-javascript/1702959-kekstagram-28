@@ -1,6 +1,7 @@
 import { usePhoto } from '../entity/photo/store/usePhoto.js';
 import { createPhotoPreviewList } from '../entity/photo/ui/photo-preview.js';
 import { createPhotoListingFilter, FILTER_MAP } from '../entity/photo/ui/listing-filter.js';
+import { createPhotoDialog } from './photo-dialog.js';
 import { createError } from '../shared/ui/error.js';
 
 export const createPhotoFeed = () => {
@@ -15,6 +16,7 @@ export const createPhotoFeed = () => {
       });
       const feedList = createPhotoPreviewList(photoListPage);
       photoFeedContainer.append(feedList);
+      createPhotoDialog();
     };
     filter
       .onSwitch(async (selectedFilter) => {
