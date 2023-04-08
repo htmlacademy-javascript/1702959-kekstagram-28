@@ -1,8 +1,8 @@
-import { createSequence } from './sequence.js';
-import { getRandomInt } from '../random.js';
+import {createSequence} from './sequence.js';
+import {getRandomInt} from '../random.js';
 
 
-const createDocument = (store, idSeq) => {
+const createCollection = (store, idSeq) => {
   const selected = [];
   const addSelected = (obj) => selected.push(obj);
   const isAllSelected = () => selected.length >= idSeq.currentValue();
@@ -24,6 +24,7 @@ const createDocument = (store, idSeq) => {
   const getRandomKey = () => getRandomInt(1, idSeq.currentValue());
   const getRandom = () => store[getRandomKey()];
   const getRandomBatch = (batchCount) => {
+    batchCount ??= idSeq.currentValue();
     const batch = [];
     const batchKeys = [];
     const getRandKey = () => {
@@ -63,20 +64,19 @@ const createDocument = (store, idSeq) => {
   };
 };
 
-const installEntityDocument = (factory, length) => {
+const fromArrayEntityCollection = (dataArray) => {
   const idSeq = createSequence();
-  const store = Array.from({ length }).reduce(
-    (document) => {
+  const store = dataArray.reduce(
+    (collection, document) => {
       const id = idSeq.nextValue();
-      document[id] = factory(id);
-      return document;
+      collection[id] = document;
+      return collection;
     },
     {}
   );
-  return createDocument(store, idSeq);
+  return createCollection(store, idSeq);
 };
-const entityDocumentFromArray = (dataArray) => installEntityDocument((id) => dataArray[id - 1], dataArray.length);
+
 export {
-  entityDocumentFromArray,
-  installEntityDocument,
+  fromArrayEntityCollection,
 };

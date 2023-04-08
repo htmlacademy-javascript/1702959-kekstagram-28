@@ -1,15 +1,16 @@
-import { photoDetail } from '../entity/photo/ui/photo-detail.js';
-import { useKekstagram } from '../feature/keks-db/index.js';
-import { photoCommentList } from '../entity/comment/ui/photo-comment-list.js';
+import { createPhotoDetail } from '../entity/photo/ui/create-photo-detail.js';
+import { usePhoto } from '../entity/photo/store/usePhoto.js';
+import { createPhotoCommentList } from '../entity/comment/photo-comment-list.js';
 
 export const createPhotoDialog = () => {
-  const kekstagramStore = useKekstagram();
+  const photoStore = usePhoto();
 
   document.querySelectorAll('.picture').forEach((photo) => {
     photo.addEventListener('click', (event) => {
       event.preventDefault();
-      const photoData = kekstagramStore.getPhotoById(photo.dataset.id);
-      photoDetail(photoData).render(photoCommentList(photoData.comments));
+      const photoData = photoStore.getById(photo.dataset.id);
+      const commentList = createPhotoCommentList({ commentListData: photoData.comments });
+      createPhotoDetail(photoData).render({ commentList });
     });
   });
 };
