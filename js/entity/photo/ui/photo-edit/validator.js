@@ -1,4 +1,4 @@
-export const createPhotoEditValidator = ({form, hashtagsInput, descriptionInput}) => {
+export const createPhotoEditValidator = ({ form, hashtagsInput, descriptionInput }) => {
   const hashTagRegexp = /^#[a-zа-яё0-9]{1,19}$/i;
   const validator = new Pristine(form, {
     classTo: 'img-upload__field-wrapper',
@@ -6,12 +6,15 @@ export const createPhotoEditValidator = ({form, hashtagsInput, descriptionInput}
     errorTextTag: 'p',
   });
 
-  validator.addValidator(hashtagsInput, (value) => value.split(' ').length <= 5, 'Хештегов не может быть более 5', 1);
+  validator.addValidator(hashtagsInput, (value) => value.split(/\s+/g).filter((hastag) => hastag.length > 0).length <= 5, 'Хештегов не может быть более 5', 1);
   validator.addValidator(hashtagsInput, (value) => {
     if (value.length) {
-      const hasTags = value.split(' ');
+      const hasTags = value.split(/\s+/g);
       for (const hastagSrc of hasTags) {
         const hastag = hastagSrc.trim();
+        if (hastag.length === 0) {
+          continue;
+        }
         if (!hashTagRegexp.test(hastag) || hastag.length > 20) {
           return false;
         }
@@ -22,9 +25,12 @@ export const createPhotoEditValidator = ({form, hashtagsInput, descriptionInput}
 
   validator.addValidator(hashtagsInput, (value) => {
     const hashtagSet = new Set();
-    const hasTags = value.split(' ');
+    const hasTags = value.split(/\s+/g);
     for (const hastagSrc of hasTags) {
       const hastag = hastagSrc.trim().toLowerCase();
+      if (hastag.length === 0) {
+        continue;
+      }
       if (hashtagSet.has(hastag)) {
         return false;
       } else {
