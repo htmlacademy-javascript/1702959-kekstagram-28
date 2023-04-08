@@ -5,9 +5,9 @@ export const useCallback = (callback = null) => {
   let cb = callback;
 
   return {
-    call: (...args) => {
+    call: async (...args) => {
       if (typeof cb === 'function') {
-        cb.apply(null, args);
+        await cb.apply(null, args);
       }
     },
     set(cback) {

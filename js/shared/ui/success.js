@@ -1,26 +1,18 @@
 import { useCallback } from '../useCallback.js';
 
-export const createError = ({ message = null, keyMessage = 'Перезагрузить страницу', onAccept = null }) => {
+export const createSuccess = ({ onAccept = null } = {}) => {
   document.body.classList.add('modal-open');
 
-  const errorModalWindow = document.querySelector('#error').content.firstElementChild.cloneNode(true);
-  const modalBody = errorModalWindow.querySelector('.error__inner');
+  const successModalWindow = document.querySelector('#success').content.firstElementChild.cloneNode(true);
+  const modalBody = successModalWindow.querySelector('.success__inner');
 
-  if (message !== null) {
-    errorModalWindow.querySelector('.error__title').textContent = message;
-  }
-  if (keyMessage !== null) {
-    errorModalWindow.querySelector('.error__button').textContent = keyMessage;
-  }
-
-  const acceptBtn = errorModalWindow.querySelector('.error__button');
+  const acceptBtn = successModalWindow.querySelector('.success__button');
   const acceptController = new AbortController();
-  const onAcceptCb = useCallback(onAccept ?? (() => {
-    location.reload();
-  }));
+
+  const onAcceptCb = useCallback(onAccept ?? (() => { }));
   const acceptAction = (event) => {
     acceptController.abort();
-    document.body.removeChild(errorModalWindow);
+    document.body.removeChild(successModalWindow);
     onAcceptCb.call(event);
   };
   const escapeAccpet = (keydown) => {
@@ -37,7 +29,8 @@ export const createError = ({ message = null, keyMessage = 'Перезагруз
   acceptBtn.addEventListener('click', acceptAction, { signal: acceptController.signal });
   document.addEventListener('keydown', escapeAccpet, { signal: acceptController.signal });
   document.addEventListener('click', clickOutsideAccept, { signal: acceptController.signal });
-  document.body.appendChild(errorModalWindow);
+
+  document.body.appendChild(successModalWindow);
 
   return {
     onAccept: onAcceptCb.set,

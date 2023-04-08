@@ -11,13 +11,7 @@ const keksDb = await (async () => {
       photo
     };
   } catch (_) {
-    createError({
-      message: 'Неудалось загрузить изображения',
-      keyMessage: 'Перезагрузить страницу',
-      onErrorClick: () => {
-        location.reload();
-      }
-    });
+    createError({ message: 'Неудалось загрузить изображения' });
   }
 })();
 

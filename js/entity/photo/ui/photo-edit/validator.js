@@ -24,7 +24,7 @@ export const createPhotoEditValidator = ({form, hashtagsInput, descriptionInput}
     const hashtagSet = new Set();
     const hasTags = value.split(' ');
     for (const hastagSrc of hasTags) {
-      const hastag = hastagSrc.trim();
+      const hastag = hastagSrc.trim().toLowerCase();
       if (hashtagSet.has(hastag)) {
         return false;
       } else {

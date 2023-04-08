@@ -111,28 +111,35 @@ const createEffectSlider = () => {
     })
     .hide();
 
-  const effectRadio = document.querySelectorAll('.effects__radio');
   const getClassname = () => `effects__preview--${selectedKey}`;
-  effectRadio.forEach((el) => {
-    el.addEventListener('change', (event) => {
-      imagePreview.classList.remove(getClassname());
-      createEffect(event.target.value);
-      if (selectedEffect && selectedEffect.range && selectedEffect.step) {
-        imagePreview.classList.add(getClassname());
-        slider.show().setRange(selectedEffect.range).setStep(selectedEffect.step);
-      } else {
-        slider.hide();
-      }
-      slider.reset();
+  const getRadioList = () => document.querySelectorAll('.effects__radio');
+  let abortChangeController = null;
+  const init = () => {
+    abortChangeController = new AbortController();
+    getRadioList().forEach((el) => {
+      el.addEventListener('change', (event) => {
+        imagePreview.classList.remove(getClassname());
+        createEffect(event.target.value);
+        if (selectedEffect && selectedEffect.range && selectedEffect.step) {
+          imagePreview.classList.add(getClassname());
+          slider.show().setRange(selectedEffect.range).setStep(selectedEffect.step);
+        } else {
+          slider.hide();
+        }
+        slider.reset();
+      }, {signal: abortChangeController.signal});
     });
-  });
+  };
+
 
   const reset = () => {
     createEffect();
+    abortChangeController.abort();
     slider.reset().hide();
   };
   return {
-    reset
+    reset,
+    init
   };
 };
 

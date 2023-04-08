@@ -1,9 +1,9 @@
-export const createCloseBtn = ({closeBtn, overlay, onClose}) => {
+export const createCloseBtn = ({ closeBtn, overlay, onClose }) => {
   const hiddenClass = 'hidden';
   const staticBodyClass = 'modal-open';
-
+  let closePrevent = false;
   const closeHandler = (event) => {
-    if (event.code !== undefined && event.code === 'Escape' || !event.code) {
+    if (!closePrevent && (event.code !== undefined && event.code === 'Escape' || !event.code)) {
       overlay.classList.add(hiddenClass);
       document.body.classList.remove(staticBodyClass);
       closeBtn.removeEventListener('click', closeHandler);
@@ -19,8 +19,20 @@ export const createCloseBtn = ({closeBtn, overlay, onClose}) => {
     closeBtn.addEventListener('click', closeHandler);
     document.addEventListener('keydown', closeHandler);
   };
+  const preventClose = () => {
+    closePrevent = true;
+  };
+  const acceptClose = () => {
+    closePrevent = false;
+  };
+  const callClose = () => {
+    closeBtn.dispatchEvent(new Event('click'));
+  };
 
   return {
-    init
+    init,
+    callClose,
+    preventClose,
+    acceptClose
   };
 };
