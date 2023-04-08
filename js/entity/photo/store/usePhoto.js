@@ -1,9 +1,9 @@
-import {photoListGet} from '../../entity/photo/api/list.get.js';
-import {fromArrayEntityCollection} from '../../shared/db/entity-collection.js';
-import {createError} from '../../shared/ui/error.js';
+import { photoListGet } from '../api/list.get.js';
+import { fromArrayEntityCollection } from '../../../shared/db/entity-collection.js';
+import { createError } from '../../../shared/ui/error.js';
 
 
-const createDb = async () => {
+const keksDb = await (async () => {
   try {
     const photoList = await photoListGet();
     const photo = fromArrayEntityCollection(photoList);
@@ -19,11 +19,10 @@ const createDb = async () => {
       }
     });
   }
-};
-const keksDb = await createDb();
+})();
 
 
-const useKekstagram = () => ({
+const usePhoto = () => ({
   /**
    * @description получает фото по id
    */
@@ -32,9 +31,9 @@ const useKekstagram = () => ({
   /**
    * @description список фотографий
    */
-  getAllPhotos: () => keksDb?.photo.selectQuery(),
+  getPhotoList: () => keksDb?.photo.selectQuery(),
 });
 
 export {
-  useKekstagram
+  usePhoto
 };

@@ -1,9 +1,9 @@
-import {useKekstagram} from '../feature/keks-db/useKekstagram.js';
-import {createPhotoPreviewList} from '../entity/photo/ui/photo-preview.js';
+import { usePhoto } from '../entity/photo/store/usePhoto.js';
+import { createPhotoPreviewList } from '../entity/photo/ui/photo-preview.js';
 
 export const createPhotoFeed = () => {
-  const kekstagramStore = useKekstagram();
-  const photoList = kekstagramStore.getAllPhotos();
+  const photoStore = usePhoto();
+  const photoList = photoStore.getPhotoList();
   if (photoList) {
     const feedList = createPhotoPreviewList(photoList);
     const photoFeedContainer = document.querySelector('.pictures');

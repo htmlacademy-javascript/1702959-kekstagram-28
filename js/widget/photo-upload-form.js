@@ -4,13 +4,13 @@ import { createEffectSlider } from '../entity/photo/ui/photo-effect-slider.js';
 import { createScaleController } from '../entity/photo/ui/scale-controller.js';
 
 export const createPhotoUploadForm = () => {
-  const scaleControl = createScaleController(document.querySelector('.img-upload__preview img'));
+  const scaleController = createScaleController(document.querySelector('.img-upload__preview img'));
   const effectSlider = createEffectSlider();
   const editWindow = createPhotoEditModalWindow();
   const photoUploader = createPhotoUploader();
 
   photoUploader.onUpload((file) => {
-    scaleControl.reset();
+    scaleController.reset();
     editWindow.setFile(file);
     editWindow.show();
   });
