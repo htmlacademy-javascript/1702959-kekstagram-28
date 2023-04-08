@@ -1,16 +1,17 @@
 import { useCallback } from '../../../shared/useCallback.js';
 
 export const createPhotoUploader = () => {
-  const fileHandler = useCallback();
+  const onUpload = useCallback();
   const uploader = document.getElementById('upload-file');
-  uploader.addEventListener('change', (event) => {
-    fileHandler.call(event.target.files[0]);
-  });
+  const uploadHandler = (event) => {
+    onUpload.call(event.target.files[0]);
+  };
+  uploader.addEventListener('change', uploadHandler);
   const cleanup = () => {
-    uploader.value = null;
+    uploader.value = '';
   };
   return {
     cleanup,
-    onUpload: fileHandler.set
+    onUpload: onUpload.set
   };
 };

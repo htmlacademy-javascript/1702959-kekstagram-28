@@ -32,7 +32,12 @@ export const createPhotoUploadForm = () => {
         }
       });
     } catch (_) {
-      createError({ keyMessage: 'Повторить', onAccept: () => { } });
+      createError({
+        keyMessage: 'Повторить',
+        onAccept: () => {
+          editWindow.acceptClose();
+        }
+      });
     }
   });
 };
