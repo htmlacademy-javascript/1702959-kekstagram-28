@@ -20,12 +20,36 @@ const usePhoto = () => ({
   /**
    * @description получает фото по id
    */
-  getPhotoById: (id) => keksDb?.photo.getById(id),
+  getById: (id) => keksDb?.photo.getById(id),
 
   /**
    * @description список фотографий
    */
-  getPhotoList: () => keksDb?.photo.selectQuery(),
+  getList: () => keksDb?.photo.selectQuery(),
+
+  /**
+   * @description список фотографий, по колличеству комментариев
+   */
+  getPopular: () => {
+    const photos = Array.from(keksDb.photo.selectQuery());
+    photos.sort((photoA, photoB) => {
+      if (photoA.comments.length === photoB.comments.length) {
+        return 0;
+      }
+      return photoA.comments.length < photoB.comments.length ? 1 : -1;
+    });
+    return photos;
+  },
+
+  /**
+   * @description список фотографий, 10 случайных
+   */
+  getListingBatch: () => keksDb.photo.getRandomBatch(10),
+
+  /**
+   * @description колличество фотографий
+   */
+  count: () => () => keksDb?.photo.selectQuery(),
 });
 
 export {

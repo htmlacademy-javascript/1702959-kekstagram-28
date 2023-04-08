@@ -8,7 +8,7 @@ export const createPhotoDialog = () => {
   document.querySelectorAll('.picture').forEach((photo) => {
     photo.addEventListener('click', (event) => {
       event.preventDefault();
-      const photoData = photoStore.getPhotoById(photo.dataset.id);
+      const photoData = photoStore.getById(photo.dataset.id);
       const commentList = createPhotoCommentList({ commentListData: photoData.comments });
       createPhotoDetail(photoData).render({ commentList });
     });
