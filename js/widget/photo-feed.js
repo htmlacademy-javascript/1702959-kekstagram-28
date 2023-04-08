@@ -1,10 +1,12 @@
-import { useKekstagram } from '../feature/keks-db/index.js';
+import { usePhoto } from '../entity/photo/store/usePhoto.js';
 import { createPhotoPreviewList } from '../entity/photo/ui/photo-preview.js';
 
 export const createPhotoFeed = () => {
-  const kekstagramStore = useKekstagram();
-  const feedList = createPhotoPreviewList(kekstagramStore.getPhotosRandomBatch(true));
-
-  const photoFeedContainer = document.querySelector('.pictures');
-  photoFeedContainer.append(feedList);
+  const photoStore = usePhoto();
+  const photoList = photoStore.getPhotoList();
+  if (photoList) {
+    const feedList = createPhotoPreviewList(photoList);
+    const photoFeedContainer = document.querySelector('.pictures');
+    photoFeedContainer.append(feedList);
+  }
 };

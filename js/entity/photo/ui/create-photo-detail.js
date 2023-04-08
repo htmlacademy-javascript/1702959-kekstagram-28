@@ -1,4 +1,4 @@
-const initDetailDialog = (url, likes, description) => {
+const createDetailDialog = ({ url, likes, description }) => {
   const dialog = document.querySelector('.big-picture');
   dialog.querySelector('.big-picture__img img').src = url;
   dialog.querySelector('.likes-count').textContent = likes;
@@ -6,10 +6,10 @@ const initDetailDialog = (url, likes, description) => {
   return dialog;
 };
 
-const photoDetail = ({ url, likes, description }) => {
+const createPhotoDetail = (photoDetail) => {
   const hiddenClass = 'hidden';
   const staticBodyClass = 'modal-open';
-  const detail = initDetailDialog(url, likes, description);
+  const detail = createDetailDialog(photoDetail);
 
   const initClose = (closeCb) => {
     const closeBtn = detail.querySelector('#picture-cancel');
@@ -29,12 +29,12 @@ const photoDetail = ({ url, likes, description }) => {
   };
 
 
-  const render = (comments) => {
-    const { cleanupListeners } = comments.render(
-      detail.querySelector('.social__comments'),
-      detail.querySelector('.social__comment-count'),
-      detail.querySelector('.social__comments-loader')
-    );
+  const render = ({ commentList }) => {
+    const commentListNode = detail.querySelector('.social__comments');
+    const commentCounter = detail.querySelector('.social__comment-count');
+    const commentLoader = detail.querySelector('.social__comments-loader');
+
+    const { cleanupListeners } = commentList.render({ commentList: commentListNode, commentCounter, commentLoader });
     initClose(cleanupListeners);
     document.body.classList.add(staticBodyClass);
     detail.classList.remove(hiddenClass);
@@ -47,5 +47,5 @@ const photoDetail = ({ url, likes, description }) => {
 
 
 export {
-  photoDetail
+  createPhotoDetail
 };
