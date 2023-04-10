@@ -1,4 +1,5 @@
 import { createPhotoCommentList as NodeListFactory } from './photo-comment.js';
+
 const getCounterBody = (showedCount, commentCount) => `${showedCount} из <span class="comments-count">${commentCount}</span> комментариев`;
 
 export const createPhotoCommentList = ({commentListData}) => {
@@ -14,7 +15,7 @@ export const createPhotoCommentList = ({commentListData}) => {
         const commentSlice = commentListData.slice(0, page * PAGE_SIZE);
         commentList.innerHTML = '';
         commentList.append(NodeListFactory(commentSlice));
-        commentCounter.innerHTML = getCounterBody(commentSlice.length, commentListData.length);
+        commentCounter.appendChild(getCounterBody(commentSlice.length, commentListData.length));
       }
       if (page >= pageCount) {
         commentLoader.classList.add(hiddenClass);

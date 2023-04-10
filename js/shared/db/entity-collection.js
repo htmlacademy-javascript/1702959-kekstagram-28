@@ -1,18 +1,16 @@
 import {createSequence} from './sequence.js';
-import {getRandomInt} from '../random.js';
-
 
 const createCollection = (store, idSeq) => {
-  const selected = [];
-  const addSelected = (obj) => selected.push(obj);
-  const isAllSelected = () => selected.length >= idSeq.currentValue();
-  const cleanupSelected = () => selected.splice(0, selected.length);
+  const selectedInstances = [];
+  const addSelected = (obj) => selectedInstances.push(obj);
+  const isAllSelected = () => selectedInstances.length >= idSeq.getCurrentValue();
+  const cleanupSelected = () => selectedInstances.splice(0, selectedInstances.length);
   const selectOne = () => {
     let result = null;
     if (!isAllSelected()) {
-      let randKey = getRandomInt(1, idSeq.currentValue());
-      while (selected.includes(randKey)) {
-        randKey = getRandomInt(1, idSeq.currentValue());
+      let randKey = idSeq.getRandom();
+      while (selectedInstances.includes(randKey)) {
+        randKey = idSeq.getRandom();
       }
       result = store[randKey];
       addSelected(result);
@@ -21,23 +19,22 @@ const createCollection = (store, idSeq) => {
   };
 
   const getById = (id) => id ? (store[id] ?? null) : null;
-  const getRandomKey = () => getRandomInt(1, idSeq.currentValue());
-  const getRandom = () => store[getRandomKey()];
+  const getRandom = () => store[idSeq.getRandom()];
   const getRandomBatch = (batchCount) => {
-    batchCount ??= idSeq.currentValue();
+    batchCount ??= idSeq.getCurrentValue();
     const batch = [];
     const batchKeys = [];
     const getRandKey = () => {
-      let randKey = getRandomKey();
+      let randKey = idSeq.getRandom();
       while (batchKeys.includes(randKey)) {
-        randKey = getRandomKey();
+        randKey = idSeq.getRandom();
       }
       return randKey;
     };
     while (
-      batchCount <= idSeq.currentValue() &&
+      batchCount <= idSeq.getCurrentValue() &&
       batch.length < batchCount &&
-      batch.length < idSeq.currentValue()
+      batch.length < idSeq.getCurrentValue()
     ) {
       const key = getRandKey();
       batch.push(store[key]);
@@ -64,11 +61,11 @@ const createCollection = (store, idSeq) => {
   };
 };
 
-const fromArrayEntityCollection = (dataArray) => {
+const createEntityCollectionFromArray = (dataArray) => {
   const idSeq = createSequence();
   const store = dataArray.reduce(
     (collection, document) => {
-      const id = idSeq.nextValue();
+      const id = idSeq.getNextValue();
       collection[id] = document;
       return collection;
     },
@@ -78,5 +75,5 @@ const fromArrayEntityCollection = (dataArray) => {
 };
 
 export {
-  fromArrayEntityCollection,
+  createEntityCollectionFromArray,
 };

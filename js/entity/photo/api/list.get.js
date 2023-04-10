@@ -1,1 +1,1 @@
-export const photoListGet = () => fetch('https://28.javascript.pages.academy/kekstagram/data').then((response) => response.json());
+export const getPhotoList = () => fetch('https://28.javascript.pages.academy/kekstagram/data').then((response) => response.json());

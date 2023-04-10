@@ -12,17 +12,17 @@ export const createPhotoUploadForm = () => {
   const editWindow = createPhotoEditModalWindow();
   const photoUploader = createPhotoUploader();
 
-  photoUploader.onUpload((file) => {
+  photoUploader.setupOnUpload((file) => {
     scaleController.reset();
     effectSlider.init();
     editWindow.setFile(file);
     editWindow.show();
   });
-  editWindow.onClose(() => {
+  editWindow.setupOnClose(() => {
     effectSlider.reset();
     photoUploader.cleanup();
   });
-  editWindow.onSubmit(async (formData) => {
+  editWindow.setupOnSubmit(async (formData) => {
     try {
       editWindow.preventClose();
       await postPhotoDetail(formData);
