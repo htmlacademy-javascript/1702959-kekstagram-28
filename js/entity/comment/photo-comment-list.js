@@ -15,7 +15,7 @@ export const createPhotoCommentList = ({commentListData}) => {
         const commentSlice = commentListData.slice(0, page * PAGE_SIZE);
         commentList.innerHTML = '';
         commentList.append(NodeListFactory(commentSlice));
-        commentCounter.appendChild(getCounterBody(commentSlice.length, commentListData.length));
+        commentCounter.innerHTML = getCounterBody(commentSlice.length, commentListData.length);
       }
       if (page >= pageCount) {
         commentLoader.classList.add(hiddenClass);
