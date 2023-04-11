@@ -1,6 +1,6 @@
 import { createSequenceArrayStore } from './sequnce-store.js';
 import { getRandomInt } from '../random.js';
-const createIntegerSequence = function* (onSequenceGet = (() => {})) {
+const createIntegerSequence = function* (onSequenceGet = (() => { })) {
   let sequnceHead = 0;
   while (true) {
     onSequenceGet(sequnceHead);
@@ -9,9 +9,11 @@ const createIntegerSequence = function* (onSequenceGet = (() => {})) {
   }
 };
 const createSequence = (sequenceFactory, store) => {
-  const sequence = sequenceFactory((sequnceElement) => {
-    store.add(sequnceElement);
-  });
+  const sequence = sequenceFactory(
+    (sequnceElement) => {
+      store.add(sequnceElement);
+    }
+  );
   const getRandom = () => {
     const keys = store.get();
     const keyIndex = getRandomInt(0, keys.length - 1);
@@ -20,7 +22,7 @@ const createSequence = (sequenceFactory, store) => {
   return {
     getRandom,
     getNextValue: () => sequence.next().value,
-    getCurrentValue: store.getLast,
+    getLength: store.count,
     exists: store.has
   };
 };

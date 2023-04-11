@@ -3,7 +3,7 @@ import {createSequence} from './sequence.js';
 const createCollection = (store, idSeq) => {
   const selectedInstances = [];
   const addSelected = (obj) => selectedInstances.push(obj);
-  const isAllSelected = () => selectedInstances.length >= idSeq.getCurrentValue();
+  const isAllSelected = () => selectedInstances.length >= idSeq.getLength();
   const cleanupSelected = () => selectedInstances.splice(0, selectedInstances.length);
   const selectOne = () => {
     let result = null;
@@ -21,7 +21,7 @@ const createCollection = (store, idSeq) => {
   const getById = (id) => id ? (store[id] ?? null) : null;
   const getRandom = () => store[idSeq.getRandom()];
   const getRandomBatch = (batchCount) => {
-    batchCount ??= idSeq.getCurrentValue();
+    batchCount ??= idSeq.getLength();
     const batch = [];
     const batchKeys = [];
     const getRandKey = () => {
@@ -32,9 +32,9 @@ const createCollection = (store, idSeq) => {
       return randKey;
     };
     while (
-      batchCount <= idSeq.getCurrentValue() &&
+      batchCount <= idSeq.getLength() &&
       batch.length < batchCount &&
-      batch.length < idSeq.getCurrentValue()
+      batch.length < idSeq.getLength()
     ) {
       const key = getRandKey();
       batch.push(store[key]);
