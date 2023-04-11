@@ -38,7 +38,7 @@ const createSwitcherList = ({ switchList }) => {
   return {
     init,
     cleanupEvents,
-    onSwitch(cb) {
+    setupOnSwitch(cb) {
       onSwitch.set(cb);
       return this;
     },
@@ -65,7 +65,7 @@ const createPhotoListingFilter = () => {
   return {
     activate,
     deactivate,
-    onSwitch: switcherList.onSwitch
+    setupOnSwitch: switcherList.setupOnSwitch
   };
 };
 

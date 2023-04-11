@@ -33,6 +33,6 @@ export const createSuccess = ({ onAccept = null } = {}) => {
   document.body.appendChild(successModalWindow);
 
   return {
-    onAccept: onAcceptCb.set,
+    setupOnAccept: onAcceptCb.set,
   };
 };

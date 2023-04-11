@@ -1,28 +1,32 @@
-const intSequence = function* () {
-  let seqHead = 0;
+import { createSequenceArrayStore } from './sequnce-store.js';
+import { getRandomInt } from '../random.js';
+const createIntegerSequence = function* (onSequenceGet = (() => { })) {
+  let sequnceHead = 0;
   while (true) {
-    yield seqHead;
-    seqHead++;
+    onSequenceGet(sequnceHead);
+    yield sequnceHead;
+    sequnceHead++;
   }
 };
-const createSequence = (sequence) => {
-  const seqReg = [];
-  let seqHead = 0;
-
-  const nextValue = () => {
-    seqHead = sequence.next().value;
-    seqReg.push(seqHead);
-    return seqHead;
+const createSequence = (sequenceFactory, store) => {
+  const sequence = sequenceFactory(
+    (sequnceElement) => {
+      store.add(sequnceElement);
+    }
+  );
+  const getRandom = () => {
+    const keys = store.get();
+    const keyIndex = getRandomInt(0, keys.length - 1);
+    return keys[keyIndex];
   };
-  const currentValue = () => seqHead;
-  const exists = (val) => seqReg.includes(val);
   return {
-    nextValue,
-    currentValue,
-    exists
+    getRandom,
+    getNextValue: () => sequence.next().value,
+    getLength: store.count,
+    exists: store.has
   };
 };
-const createIntSequence = () => createSequence(intSequence());
+const createIntSequence = () => createSequence(createIntegerSequence, createSequenceArrayStore());
 export {
   createIntSequence as createSequence
 };

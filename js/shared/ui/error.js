@@ -40,6 +40,6 @@ export const createError = ({ message = null, keyMessage = 'Перезагруз
   document.body.appendChild(errorModalWindow);
 
   return {
-    onAccept: onAcceptCb.set,
+    setupOnAccept: onAcceptCb.set,
   };
 };

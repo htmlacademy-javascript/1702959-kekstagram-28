@@ -30,8 +30,8 @@ export const createPhotoEditModalWindow = () => {
     show,
     close: closeBtn.callClose,
     setFile: (file) => previewImg.setPreviewImage(file),
-    onClose: onClose.set,
-    onSubmit: form.onSubmit,
+    setupOnClose: onClose.set,
+    setupOnSubmit: form.onSubmit,
     preventClose: closeBtn.preventClose,
     acceptClose: closeBtn.acceptClose,
   };

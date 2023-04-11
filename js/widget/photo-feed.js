@@ -19,7 +19,7 @@ export const createPhotoFeed = () => {
       createPhotoDialog();
     };
     filter
-      .onSwitch(async (selectedFilter) => {
+      .setupOnSwitch(async (selectedFilter) => {
         let photoList = null;
         switch (selectedFilter) {
           case FILTER_MAP.DEFAULT:

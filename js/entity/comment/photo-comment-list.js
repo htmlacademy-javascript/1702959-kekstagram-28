@@ -1,4 +1,5 @@
 import { createPhotoCommentList as NodeListFactory } from './photo-comment.js';
+
 const getCounterBody = (showedCount, commentCount) => `${showedCount} из <span class="comments-count">${commentCount}</span> комментариев`;
 
 export const createPhotoCommentList = ({commentListData}) => {
