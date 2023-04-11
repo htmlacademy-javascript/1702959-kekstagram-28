@@ -1,6 +1,6 @@
 import { createSequenceArrayStore } from './sequnce-store.js';
 import { getRandomInt } from '../random.js';
-const createIntegerSequence = function* (onSequenceGet) {
+const createIntegerSequence = function* (onSequenceGet = (() => {})) {
   let sequnceHead = 0;
   while (true) {
     onSequenceGet(sequnceHead);
